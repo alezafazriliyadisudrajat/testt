@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanya Satu-satu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            animation: fadeBg 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes fadeBg {
+            from {
+                background-color: #ffe6f2;
+            }
+
+            to {
+                background-color: #ffd1ec;
+            }
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        h1 {
+            color: #097a97;
+        }
+
+        h2 {
+            color: #ff4da6;
+        }
+
+        .question {
+            margin-bottom: 15px;
+            opacity: 0;
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            font-weight: bold;
+            color: #ff4da6;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #ff4da6;
+            box-shadow: 0 0 8px rgba(255, 77, 166, 0.5);
+            transform: scale(1.02);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff4da6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        button:hover {
+            background: #e60073;
+            transform: scale(1.05);
+        }
+
+        .love-message {
+            display: none;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff0f6;
+            border-left: 5px solid #ff4da6;
+            border-radius: 8px;
+            color: #cc0066;
+            font-style: italic;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .question {
+            max-width: 390px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>😶‍🌫️ Ada beberapa Pertanyaan 😶‍🌫️</h1>
+        <h2>💖 Antara Aku Kamu & Rasa Itu 💖</h2>
+
+        <div class="question"><label>1. nama kamu</label><input type="text"></div>
+        <div class="question"><label>2. kenal aku dari mana?</label><input type="text"></div>
+        <div class="question"><label>3. hal kecil apa yang kamu ingat dari aku?</label><input type="text"></div>
+        <div class="question"><label>4. katanya, kamu udah nemuin cowok yang kamu mau selama ini? Jelasin
+                kenapa?</label><input type="text"></div>
+        <div class="question"><label>5. hal yang kamu suka dari aku?</label><input type="text"></div>
+        <div class="question"><label>6. momen yang paling kamu ingat sama aku?</label><input type="text"></div>
+        <div class="question"><label>7. kalo aku ilang atau ga bales cepat, kamu nyariin aku?</label><input type="text">
+        </div>
+        <div class="question"><label>8. bisa saling menghargai cerita? Kalau dipotong, bakal ditanya lagi atau
+                tidak?</label><input type="text"></div>
+        <div class="question"><label>9. apakah kamu masih gamon karena masa lalu?</label><input type="text"></div>
+        <div class="question"><label>10. kasih pesan spesial buat aku ke depannya 💌</label><textarea
+                rows="3"></textarea></div>
+
+        <div class="love-message" id="loveMsg">
+            aku cuma mau kamu tau, kalau dari semua tanya yang aku kasih ini, jawabannya nggak akan pernah bikin aku
+            berhenti sayang sama kamu.
+            karena buat aku, kamu itu rumah, tempat aku pulang, dan alasan aku mau terus berjuang. 💖 maaf kalo agak
+            alay dan kepo haha.... nnti aku buat yg versi kaya surat gitu.
+        </div>
+
+        <button id="sendBtn" onclick="kirimWA()">Kirim Jawaban</button>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let totalQuestions;
+        let answers = [];
+
+        window.onload = () => {
+            let qList = document.querySelectorAll(".question");
+            totalQuestions = qList.length;
+            showQuestion(currentQuestion);
+
+            qList.forEach((q, index) => {
+                let input = q.querySelector("input, textarea");
+                input.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        goNext(index);
+                    }
+                });
+                input.addEventListener("blur", () => goNext(index));
+            });
+        };
+
+        function showQuestion(index) {
+            let q = document.querySelectorAll(".question")[index];
+            if (q) {
+                q.style.display = "block";
+                setTimeout(() => { q.style.opacity = 1; }, 50);
+            }
+        }
+
+        function goNext(index) {
+            let qList = document.querySelectorAll(".question");
+            let input = qList[index].querySelector("input, textarea");
+            let val = input.value.trim();
+
+            if (!val) {
+                alert("Jawaban tidak boleh kosong 💖");
+                return;
+            }
+
+            answers[index] = val;
+
+            if (index + 1 < totalQuestions) {
+                showQuestion(index + 1);
+            } else {
+                document.getElementById("loveMsg").style.display = "block";
+                document.getElementById("sendBtn").style.display = "block";
+            }
+        }
+
+        function kirimWA() {
+            let pesan = "Halo, sayang ini jawaban dari aku buat kamu:%0A%0A";
+            answers.forEach((ans, i) => {
+                pesan += `${i + 1}. ${ans}%0A`;
+            });
+
+            let nomorWA = "628561276261";
+            window.open(`https://wa.me/${nomorWA}?text=${pesan}`, "_blank");
+        }
+    </script>
+
+</body>
+
+</html>
