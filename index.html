@@ -30,24 +30,29 @@
 
         .container {
             max-width: 400px;
-            width: 100%;
+            width: 90%;
             background: white;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
         }
 
         h1,
         h2 {
             text-align: center;
+            margin: 0;
         }
 
         h1 {
             color: #097a97;
+            font-size: 1.4rem;
         }
 
         h2 {
             color: #ff4da6;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
         .question {
@@ -74,6 +79,7 @@
             color: #ff4da6;
             display: block;
             margin-bottom: 5px;
+            font-size: 0.95rem;
         }
 
         input,
@@ -82,8 +88,9 @@
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #ccc;
-            font-size: 14px;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
         input:focus,
@@ -100,11 +107,12 @@
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             display: none;
+            margin-top: 15px;
         }
 
         button:hover {
@@ -122,10 +130,38 @@
             color: #cc0066;
             font-style: italic;
             animation: fadeIn 1s ease-out forwards;
+            font-size: 0.9rem;
         }
 
-        .question {
-            max-width: 390px;
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            input,
+            textarea {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -139,26 +175,20 @@
         <div class="question"><label>1. nama kamu</label><input type="text"></div>
         <div class="question"><label>2. kenal aku dari mana?</label><input type="text"></div>
         <div class="question"><label>3. hal kecil apa yang kamu ingat dari aku?</label><input type="text"></div>
-        <div class="question"><label>4. katanya, kamu udah nemuin cowok yang kamu mau selama ini? Jelasin
-                kenapa?</label><input type="text"></div>
+        <div class="question"><label>4. katanya, kamu udah nemuin cowok yang kamu mau selama ini? Jelasin kenapa?</label><input type="text"></div>
         <div class="question"><label>5. hal yang kamu suka dari aku?</label><input type="text"></div>
         <div class="question"><label>6. momen yang paling kamu ingat sama aku?</label><input type="text"></div>
-        <div class="question"><label>7. kalo aku ilang atau ga bales cepat, kamu nyariin aku?</label><input type="text">
-        </div>
-        <div class="question"><label>8. bisa saling menghargai cerita? Kalau dipotong, bakal ditanya lagi atau
-                tidak?</label><input type="text"></div>
+        <div class="question"><label>7. kalo aku ilang atau ga bales cepat, kamu nyariin aku?</label><input type="text"></div>
+        <div class="question"><label>8. bisa saling menghargai cerita? Kalau dipotong, bakal ditanya lagi atau tidak?</label><input type="text"></div>
         <div class="question"><label>9. apakah kamu masih gamon karena masa lalu?</label><input type="text"></div>
-        <div class="question"><label>10. kasih pesan spesial buat aku ke depannya 💌</label><textarea
-                rows="3"></textarea></div>
+        <div class="question"><label>10. kasih pesan spesial buat aku ke depannya 💌</label><textarea rows="3"></textarea></div>
 
         <div class="love-message" id="loveMsg">
-            aku cuma mau kamu tau, kalau dari semua tanya yang aku kasih ini, jawabannya nggak akan pernah bikin aku
-            berhenti sayang sama kamu.
-            karena buat aku, kamu itu rumah, tempat aku pulang, dan alasan aku mau terus berjuang. 💖 maaf kalo agak
-            alay dan kepo haha.... nnti aku buat yg versi kaya surat gitu.
+            aku cuma mau kamu tau, kalau dari semua tanya yang aku kasih ini, jawabannya nggak akan pernah bikin aku berhenti sayang sama kamu.
+            karena buat aku, kamu itu rumah, tempat aku pulang, dan alasan aku mau terus berjuang. 💖
         </div>
 
-        <button id="sendBtn" onclick="kirimWA()">Kirim Jawaban</button>
+        <button id="sendBtn" onclick="kirimWA()">kirim ke cowo mu!</button>
     </div>
 
     <script>
